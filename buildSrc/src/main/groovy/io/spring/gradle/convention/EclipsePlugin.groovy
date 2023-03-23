@@ -56,6 +56,16 @@ class EclipsePlugin implements Plugin<Project> {
 					}
 				}
 			}
+			jdt {
+				file {
+					withProperties { properties ->
+						// there are cycles and then dependencies between projects main sources and
+						// test sources. Relax those from error to warning
+						properties['org.eclipse.jdt.core.circularClasspath'] = 'warning'
+						properties['org.eclipse.jdt.core.incompleteClasspath'] = 'warning'
+					}
+				}
+			}
 		}
 	}
 
